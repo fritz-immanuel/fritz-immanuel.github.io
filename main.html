@@ -1,0 +1,698 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fritz Immanuel | Software Engineer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@300;400;500;600;700&family=Space+Mono&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+      :root {
+        --primary: #2563eb;
+        --primary-dark: #1d4ed8;
+        --secondary: #7c3aed;
+        --dark: #0f172a;
+        --light: #f8fafc;
+        --accent: #f59e0b;
+        --card-bg: rgba(255, 255, 255, 0.95);
+        --glass: rgba(255, 255, 255, 0.15);
+      }
+      
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      
+      body {
+        font-family: 'Space Grotesk', sans-serif;
+        line-height: 1.6;
+        color: var(--dark);
+        background: linear-gradient(135deg, #f8fafc 0%, #e2e8f0 100%);
+        min-height: 100vh;
+        background-attachment: fixed;
+      }
+      
+      code, .mono {
+        font-family: 'Space Mono', monospace;
+      }
+      
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 2rem;
+      }
+      
+      header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 3rem;
+        padding: 2rem 0;
+        position: relative;
+      }
+      
+      header::after {
+        content: '';
+        position: absolute;
+        bottom: 0;
+        left: 0;
+        width: 100%;
+        height: 1px;
+        background: linear-gradient(90deg, transparent 0%, var(--primary) 50%, transparent 100%);
+      }
+      
+      .header-content {
+        display: flex;
+        align-items: center;
+        gap: 2rem;
+      }
+      
+      .photo-placeholder {
+        width: 370px;
+        height: 200px;
+        border-radius: 50%;
+        background-color: var(--glass);
+        border: 3px solid var(--primary);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+        box-shadow: 0 0 30px rgba(37, 99, 235, 0.3);
+        object-fit: contain;
+      }
+      
+      .photo-placeholder svg {
+        width: 60%;
+        height: 60%;
+        color: var(--dark);
+        opacity: 0.7;
+      }
+      
+      .header-text h1 {
+        font-size: 2.5rem;
+        color: var(--dark);
+        margin-bottom: 0.5rem;
+        letter-spacing: -0.5px;
+      }
+      
+      .header-text h2 {
+        font-size: 1.2rem;
+        font-weight: 400;
+        color: var(--primary-dark);
+      }
+      
+      .tagline {
+        font-size: 1.1rem;
+        color: var(--dark);
+        opacity: 0.9;
+        max-width: 600px;
+        margin-bottom: 1.5rem;
+      }
+      
+      .about-text {
+        background-color: var(--card-bg);
+        padding: 1.5rem;
+        border-radius: 12px;
+        margin-bottom: 2rem;
+        border-left: 4px solid var(--primary);
+      }
+      
+      .contact-info {
+        display: flex;
+        gap: 1.5rem;
+        flex-wrap: wrap;
+      }
+      
+      .contact-item {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: var(--dark);
+        opacity: 0.9;
+        transition: all 0.3s ease;
+        text-decoration: none;
+      }
+      
+      .contact-item:hover {
+        opacity: 1;
+        color: var(--primary);
+      }
+      
+      .contact-item svg {
+        width: 18px;
+        height: 18px;
+      }
+      
+      .main-content {
+        display: grid;
+        grid-template-columns: 1fr 2fr;
+        gap: 2rem;
+      }
+      
+      .sidebar {
+        display: flex;
+        flex-direction: column;
+        gap: 2rem;
+      }
+      
+      .card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.5rem;
+        box-shadow: 0 8px 32px rgba(0, 0, 0, 0.1);
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        margin-bottom: 1rem;
+      }
+      
+      .card:last-child {
+        margin-bottom: 0;
+      }
+      
+      .card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 12px 40px rgba(37, 99, 235, 0.15);
+      }
+      
+      h3 {
+        color: var(--primary);
+        margin-bottom: 1.5rem;
+        font-size: 1.3rem;
+        position: relative;
+        display: inline-block;
+      }
+      
+      h3::after {
+        content: '';
+        position: absolute;
+        bottom: -8px;
+        left: 0;
+        width: 40px;
+        height: 3px;
+        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        border-radius: 3px;
+      }
+      
+      .skills-list {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+      }
+      
+      .skill-category h4 {
+        margin-bottom: 1rem;
+        color: var(--dark);
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+      
+      .skill-category h4 svg {
+        width: 16px;
+        height: 16px;
+        color: var(--primary);
+      }
+      
+      .skill-items {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-bottom: 1.5rem;
+      }
+      
+      .skill-item {
+        background: linear-gradient(90deg, var(--primary) 0%, var(--secondary) 100%);
+        color: white;
+        padding: 0.4rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+      
+      .experience-item, .education-item {
+        margin-bottom: 2rem;
+        position: relative;
+        padding-left: 1.5rem;
+      }
+      
+      .experience-item::before, .education-item::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 5px;
+        width: 8px;
+        height: 8px;
+        border-radius: 50%;
+        background: var(--primary);
+      }
+      
+      .experience-header, .education-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 0.5rem;
+        flex-wrap: wrap;
+        gap: 1rem;
+      }
+      
+      .company, .degree {
+        font-weight: 700;
+        color: var(--dark);
+        font-size: 1.1rem;
+      }
+      
+      .position, .institution {
+        font-weight: 500;
+        color: var(--secondary);
+        font-size: 0.95rem;
+      }
+      
+      .date {
+        background-color: var(--primary);
+        color: white;
+        padding: 0.2rem 0.8rem;
+        border-radius: 20px;
+        font-size: 0.8rem;
+        font-weight: 500;
+        height: 50%;
+        
+      }
+      
+      .experience-details, .education-details {
+        margin-left: 1rem;
+      }
+      
+      .experience-details li, .education-details li {
+        margin-bottom: 0.5rem;
+        position: relative;
+        padding-left: 1.2rem;
+      }
+      
+      .experience-details li::before, .education-details li::before {
+        content: '▹';
+        position: absolute;
+        left: 0;
+        color: var(--primary);
+      }
+      
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 1.5rem;
+        margin-top: 1.5rem;
+      }
+      
+      .project-card {
+        background: var(--card-bg);
+        border-radius: 12px;
+        padding: 1.5rem;
+        border: 1px solid rgba(0, 0, 0, 0.05);
+        transition: all 0.3s ease;
+        position: relative;
+      }
+      
+      .project-card:hover {
+        transform: translateY(-5px);
+        box-shadow: 0 10px 30px rgba(37, 99, 235, 0.15);
+      }
+      
+      .project-card h4 {
+        font-size: 1.1rem;
+        margin-bottom: 0.5rem;
+        color: var(--primary);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+      
+      .project-card h4 .github-link {
+        color: var(--dark);
+        transition: all 0.3s ease;
+      }
+      
+      .project-card h4 .github-link:hover {
+        color: var(--primary);
+        transform: scale(1.1);
+      }
+      
+      .project-card p {
+        font-size: 0.9rem;
+        color: var(--dark);
+        opacity: 0.9;
+        margin-bottom: 1rem;
+      }
+      
+      .project-tech {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        margin-top: 1rem;
+      }
+      
+      .project-tech span {
+        background-color: #e0e7ff;
+        color: var(--primary);
+        padding: 0.2rem 0.6rem;
+        border-radius: 20px;
+        font-size: 0.75rem;
+        font-weight: 500;
+      }
+      
+      .language-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 1rem;
+      }
+      
+      .language-name {
+        font-weight: 500;
+      }
+      
+      .language-level {
+        font-size: 0.85rem;
+        color: var(--secondary);
+        font-style: italic;
+      }
+      
+      @media (max-width: 768px) {
+        .main-content {
+          grid-template-columns: 1fr;
+        }
+        
+        header {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 2rem;
+        }
+        
+        .header-content {
+          flex-direction: column;
+          align-items: flex-start;
+        }
+        
+        .contact-info {
+          flex-wrap: wrap;
+        }
+      }
+    </style>
+  </head>
+<body>
+  <div class="container">
+    <header>
+      <div class="header-content">
+        <div class="photo-placeholder">
+          <img src="Fritz_Immanuel - Pas Foto.jpg" alt="Your Photo" onerror="this.style.display='none'" style="height: 100%;">
+          <!-- <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1" d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+          </svg> -->
+        </div>
+        <div class="header-text">
+          <h1>Fritz Immanuel</h1>
+          <h2>Software Engineer | Backend Specialist</h2>
+          <div class="about-text">
+            <p>Forever a student striving for the best. Experienced in Backend Engineering using Golang and MySQL as daily duties. Always trying to prepare for 10 steps ahead of the client to deliver the best possible end product.</p>
+            <p>Currently pursuing knowledge in the Data Science & Machine Learning world.</p>
+          </div>
+          <div class="contact-info">
+            <a href="https://wa.me/+628111683183" target="blank" class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
+              </svg>
+              <span>+62 811 1683 183</span>
+            </a>
+            <a href="mailto:fritz.immanuel00@gmail.com" target="blank" class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+              </svg>
+              <span>fritz.immanuel00@gmail.com</span>
+            </a>
+            <a href="https://www.linkedin.com/in/fritz-immanuel" target="blank" class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 12a9 9 0 01-9 9m9-9a9 9 0 00-9-9m9 9H3m9 9a9 9 0 01-9-9m9 9c1.657 0 3-4.03 3-9s-1.343-9-3-9m0 18c-1.657 0-3-4.03-3-9s1.343-9 3-9m-9 9a9 9 0 019-9" />
+              </svg>
+              <span>LinkedIn</span>
+            </a>
+            <a href="https://github.com/fritz-immanuel" target="blank" class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+              </svg>
+              <span>GitHub</span>
+            </a>
+            <a href="https://www.datascienceportfol.io/fritzimmanuel00" target="blank" class="contact-item">
+              <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 3v2m6-2v2M9 19v2m6-2v2M5 9H3m2 6H3m18-6h-2m2 6h-2M7 19h10a2 2 0 002-2V7a2 2 0 00-2-2H7a2 2 0 00-2 2v10a2 2 0 002 2zM9 9h6v6H9V9z" />
+              </svg>
+              <span>DataSciencePortfolio</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </header>
+    
+    <div class="main-content">
+      <aside class="sidebar">
+        <div class="card">
+          <h3>EDUCATION</h3>
+          <div class="education-item">
+            <div class="education-header">
+              <div>
+                <p class="degree">Data Science & Machine Learning</p>
+                <p class="institution">Purwadhika Digital School</p>
+              </div>
+              <span class="date">2024-2025</span>
+            </div>
+            <ul class="education-details">
+              <li>Python Fundamentals: Developed proficiency in Python, focusing on scripting, data types, and functions</li>
+              <li>Data Analysis: Performed data manipulation using pandas DataFrame, numerical computations with NumPy</li>
+              <li>Machine Learning: Built supervised & unsupervised models, recommendation systems, text mining</li>
+            </ul>
+          </div>
+          
+          <div class="education-item">
+            <div class="education-header">
+              <div>
+                <p class="degree">B.Sc Computer Science</p>
+                <p class="institution">BINUS University</p>
+              </div>
+              <span class="date">2017-2021</span>
+            </div>
+            <ul class="education-details">
+              <li>Minored in Artificial Intelligence</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>TECHNICAL SKILLS</h3>
+          <div class="skills-list">
+            <div class="skill-category">
+              <h4>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.75 17L9 20l-1 1h8l-1-1-.75-3M3 13h18M5 17h14a2 2 0 002-2V5a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
+                </svg>
+                Backend Technologies
+              </h4>
+              <div class="skill-items">
+                <span class="skill-item">Golang</span>
+                <span class="skill-item">Node.js</span>
+                <span class="skill-item">MySQL</span>
+                <span class="skill-item">PostgreSQL</span>
+                <span class="skill-item">Redis</span>
+                <span class="skill-item">Docker</span>
+              </div>
+            </div>
+            
+            <div class="skill-category">
+              <h4>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10" />
+                </svg>
+                Data Science
+              </h4>
+              <div class="skill-items">
+                <span class="skill-item">Python</span>
+                <span class="skill-item">Pandas</span>
+                <span class="skill-item">NumPy</span>
+                <span class="skill-item">Matplotlib</span>
+                <span class="skill-item">Seaborn</span>
+                <span class="skill-item">Scikit-learn</span>
+                <span class="skill-item">Tableau</span>
+                <span class="skill-item">Excel</span>
+              </div>
+            </div>
+            
+            <div class="skill-category">
+              <h4>
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4" />
+                </svg>
+                Other Technologies
+              </h4>
+              <div class="skill-items">
+                <span class="skill-item">Google OAuth2</span>
+                <span class="skill-item">Xendit</span>
+                <span class="skill-item">Midtrans</span>
+                <span class="skill-item">EmberJS</span>
+                <span class="skill-item">jQuery</span>
+                <span class="skill-item">Handlebars</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>LANGUAGES</h3>
+          <div class="language-item">
+            <span class="language-name">Indonesian</span>
+            <span class="language-level">Native</span>
+          </div>
+          <div class="language-item">
+            <span class="language-name">English</span>
+            <span class="language-level">Fluent</span>
+          </div>
+          <div class="language-item">
+            <span class="language-name">Deutsch</span>
+            <span class="language-level">B1 (ongoing)</span>
+          </div>
+        </div>
+      </aside>
+      
+      <main class="main-section">
+        <div class="card">
+          <h3>PROFESSIONAL EXPERIENCE</h3>
+          
+          <div class="experience-item">
+            <div class="experience-header">
+              <div>
+                <p class="company">PT Digerati Atomic Indonesia</p>
+                <p class="position">Backend Engineer (Full-time)</p>
+              </div>
+              <span class="date">2021-2024</span>
+            </div>
+            <ul class="experience-details">
+              <li>Led Backend role in a team of 5, responsible for designing Backend Service infrastructure using Golang & MySQL</li>
+              <li>Maintained existing projects and refactored code to ensure readability and performance</li>
+              <li>Improved team development workflow by enhancing communication and Kanban board usage</li>
+              <li>Technologies used: Golang, MySQL, PostgreSQL, Redis, Docker, Google OAuth2, Xendit, Midtrans</li>
+              <li>Projects:
+                <ul style="list-style-type: circle; margin-left: 1.5rem; margin-top: 0.5rem;">
+                  <li>ANGKE Restaurant POS System</li>
+                  <li>ANGKE Restaurant Customer Queue System</li>
+                  <li>ANGKE Fren (Customer Loyalty App)</li>
+                  <li>GII HOKIMTONG Sweety Kids</li>
+                  <li>Permaisuri E-Commerce App</li>
+                  <li>Danone Employee System Integration</li>
+                </ul>
+              </li>
+            </ul>
+          </div>
+          
+          <div class="experience-item">
+            <div class="experience-header">
+              <div>
+                <p class="company">PT Adira Dinamika Multi Finance</p>
+                <p class="position">Backend Engineer Intern</p>
+              </div>
+              <span class="date">2020-2021</span>
+            </div>
+            <ul class="experience-details">
+              <li>Worked on the momobil.id team, a leading e-commerce for cars financed by Adira</li>
+              <li>Responsible for development and maintenance of the web application</li>
+              <li>Focused on backend development using NodeJS</li>
+              <li>Implemented logic-based development (controller & model/routes level) on the frontend using EmberJS</li>
+              <li>Technologies used: JavaScript, jQuery, Handlebars, CSS, Git, JIRA</li>
+            </ul>
+          </div>
+        </div>
+        
+        <div class="card">
+          <h3>PROJECT HIGHLIGHTS</h3>
+          <div class="projects-grid">
+            <div class="project-card">
+              <h4>
+                ANGKE Restaurant Systems
+              </h4>
+              <p>Full suite of restaurant management tools including POS, customer queue, and loyalty systems built with Golang backend.</p>
+              <div class="project-tech">
+                <span>Golang</span>
+                <span>MySQL</span>
+                <span>Redis</span>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <h4>
+                Permaisuri E-Commerce
+              </h4>
+              <p>Complete e-commerce platform with payment integrations and inventory management.</p>
+              <div class="project-tech">
+                <span>Golang</span>
+                <span>Xendit</span>
+                <span>Midtrans</span>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <h4>
+                momobil.id
+              </h4>
+              <p>E-commerce platform for car financing during internship, featuring backend services and frontend logic.</p>
+              <div class="project-tech">
+                <span>Node.js</span>
+                <span>EmberJS</span>
+                <span>MySQL</span>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <h4>
+                Client/Project Management System (CRUD)
+                <a href="https://github.com/fritz-immanuel/cpms-py" class="github-link" title="View on GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              </h4>
+              <p>The Client Project Management System (CPMS) is a Python-based CRUD application designed to manage a company's client and project database. It streamlines data storage, updates, and retrieval, ensuring efficient tracking and organization.</p>
+              <div class="project-tech">
+                <span>Python</span>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <h4>
+                New York City TLC Trip Record Analysis
+                <a href="https://github.com/fritz-immanuel/Capstone-Mod-2" class="github-link" title="View on GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              </h4>
+              <p>This project analyzes the New York TLC Trip Record (January 2023) to enhance data analysis skills using Python. It focuses on extracting key insights through in-depth exploration and analysis.</p>
+              <div class="project-tech">
+                <span>Python</span>
+                <span>Tableau</span>
+                <span>MySQL</span>
+              </div>
+            </div>
+            
+            <div class="project-card">
+              <h4>
+                Solving E-Commerce Customer Churn Using Machine Learning
+                <a href="https://github.com/fritz-immanuel/Capstone-Module-3---Machine-Learning" class="github-link" title="View on GitHub">
+                  <i class="fab fa-github"></i>
+                </a>
+              </h4>
+              <p>This project applies Machine Learning to predict e-commerce customer churn, helping businesses identify at-risk customers and improve retention strategies. By analyzing behavioral patterns and transaction data, the model provides actionable insights to reduce churn and enhance customer loyalty.</p>
+              <div class="project-tech">
+                <span>Python</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+    </div>
+  </div>
+</body>
+</html>
